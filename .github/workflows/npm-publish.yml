@@ -7,8 +7,11 @@ on:
   push: 
     branches:
       - main
+    release:
+      types: [published]
   workflow_dispatch: 
-
+permissions:
+  contents: read
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,6 +21,7 @@ jobs:
         with:
           node-version: 20
       - run: npm ci
+      - run: npm test --if-present
 
   publish-npm:
     needs: build
@@ -29,6 +33,17 @@ jobs:
           node-version: 20
           registry-url: https://registry.npmjs.org/
       - run: npm ci
+      - run: npm version patch --no-git-tag-version
       - run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          NODE_AUTH_TOKEN: ${{secrets.NODE_SECRET}}
+    name: commit increment patch version
+    run: |
+      git config --global user.name 'github-actions[bot]'
+      git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+      git add package.json
+      git commit -m "chore: increment patch version [skip ci]"
+      git push
+
+
+  
