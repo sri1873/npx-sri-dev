@@ -1,6 +1,6 @@
 {
   "name": "sri-dev",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Sri Kumar's personal developer CLI",
   "bin": {
     "sri-dev": "./index.js"
