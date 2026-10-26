@@ -1,4 +1,4 @@
-#!/usr/bin / env node
+#!/usr/bin/env node
 
 import pc from "picocolors";
 import * as p from "@clack/prompts";
