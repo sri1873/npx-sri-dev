@@ -7,12 +7,14 @@ on:
   push:
     branches:
       - main
-    release:
-      types: [published]
+  release:
+    types: [published]
   workflow_dispatch:
+
 permissions:
   contents: read
   id-token: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,7 +22,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
+          package-manager-cache: false
       - run: npm ci
       - run: npm test --if-present
 
@@ -31,7 +34,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
+          package-manager-cache: false
           registry-url: https://registry.npmjs.org/
 
       - run: npm ci
@@ -40,7 +44,6 @@ jobs:
 
       - name: Publish to npm
         run: npm publish
- 
 
       - name: commit increment patch version
         run: |
