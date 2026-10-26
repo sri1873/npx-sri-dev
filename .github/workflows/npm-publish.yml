@@ -12,6 +12,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+  id-token: write
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -39,8 +40,7 @@ jobs:
 
       - name: Publish to npm
         run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NODE_SECRET}}
+ 
 
       - name: commit increment patch version
         run: |
