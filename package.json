@@ -5,6 +5,10 @@
   "bin": {
     "sri-dev": "./index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sri1873/npx-sri-dev"
+  },
   "type": "module",
   "scripts": {
     "start": "node index.js"
