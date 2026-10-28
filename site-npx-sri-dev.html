@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Srikumar K S, Java backend engineer</title>
+  <meta name="description"
+    content="My portfolio website is still being built. Until then, run npx sri-dev to see it in your terminal.">
+  <meta name="theme-color" content="#0D0A15">
+  <meta property="og:title" content="Srikumar K S, Java backend engineer">
+  <meta property="og:description"
+    content="My portfolio website is still being built. Until then, run npx sri-dev to see it in your terminal.">
+  <meta property="og:type" content="website">
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231D1928'/%3E%3Cpath d='M11 9l7 7-7 7' fill='none' stroke='%23EE7ACB' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Martian+Mono:wdth,wght@75..112.5,300..700&family=Schibsted+Grotesk:wght@400..700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --space: #0D0A15;
+      --ink: #ECE9F4;
+      --muted: #A39DB6;
+      --accent: #F07ACB;
+      --rule: rgba(236, 233, 244, 0.12);
+
+      --term: rgba(29, 25, 40, 0.78);
+      --term-line: rgba(236, 233, 244, 0.12);
+      --t-text: #E7E4EF;
+      --t-dim: #8C869E;
+      --t-magenta: #EE7ACB;
+
+      --mono: "Martian Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+      --sans: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+      background: var(--space);
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 1.0625rem;
+      line-height: 1.55;
+      padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+    }
+
+    /* Faint nebula glow, tinted with the CLI's magenta and cyan */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(55rem 38rem at 88% -8%, rgba(238, 122, 203, 0.11), transparent 62%),
+        radial-gradient(48rem 34rem at -8% 108%, rgba(103, 211, 227, 0.08), transparent 62%),
+        radial-gradient(70rem 50rem at 50% 50%, rgba(60, 44, 110, 0.18), transparent 70%);
+    }
+
+    .sky {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 46rem;
+      padding: clamp(2.5rem, 8vh, 5rem) 1.25rem;
+    }
+
+    .who {
+      margin: 0 0 2.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .who strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    h1 {
+      margin: 0 0 0.75rem;
+      max-width: 20ch;
+      font-size: clamp(1.8rem, 4.6vw, 2.65rem);
+      line-height: 1.12;
+      font-weight: 650;
+      letter-spacing: -0.018em;
+      text-wrap: balance;
+    }
+
+    .lede {
+      margin: 0 0 2.25rem;
+      max-width: 36rem;
+      color: var(--muted);
+    }
+
+    .term {
+      background: var(--term);
+      color: var(--t-text);
+      border: 1px solid var(--term-line);
+      border-radius: 8px;
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+    }
+
+    @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+      .term {
+        background: #1D1928;
+      }
+    }
+
+    .cmd {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.9rem 1rem;
+      padding: 1.35rem 1.25rem 1.35rem 1.5rem;
+    }
+
+    .cmd code {
+      font-family: var(--mono);
+      font-size: clamp(1.2rem, 5.4vw, 2.4rem);
+      font-weight: 500;
+      font-stretch: 112.5%;
+      font-variation-settings: "wdth" 112.5;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+
+    .cmd .prompt {
+      color: var(--t-dim);
+    }
+
+    .cmd .pkg {
+      color: var(--t-magenta);
+    }
+
+    .copy {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      font-weight: 600;
+      min-width: 6.5rem;
+      padding: 0.7rem 1rem;
+      border: 0;
+      border-radius: 4px;
+      background: var(--t-magenta);
+      color: #1D1928;
+      cursor: pointer;
+      transition: filter 0.15s ease;
+    }
+
+    .copy:hover {
+      filter: brightness(1.08);
+    }
+
+    .copy:focus-visible {
+      outline: 2px solid var(--t-text);
+      outline-offset: 3px;
+    }
+
+    .note {
+      margin: 0.9rem 0 0;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .note code {
+      font-family: var(--mono);
+      font-size: 0.85em;
+      color: var(--ink);
+    }
+
+    footer {
+      margin-top: 3.75rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.5rem 1.5rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    footer p {
+      margin: 0;
+      flex-basis: 100%;
+    }
+
+    @media (min-width: 40rem) {
+      footer p {
+        flex-basis: auto;
+        margin-right: 0.5rem;
+      }
+    }
+
+    footer a {
+      color: var(--ink);
+      font-weight: 500;
+      text-decoration: underline;
+      text-decoration-color: var(--accent);
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: 4px;
+    }
+
+    footer a:hover {
+      color: var(--accent);
+    }
+
+    footer a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    @media (max-width: 30rem) {
+      .cmd {
+        padding: 1.1rem;
+      }
+
+      .copy {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .copy {
+        transition: none;
+      }
+    }
+  </style>
+  <script defer>
+    document.addEventListener("DOMContentLoaded", function () {
+      /* ---------- Copy the command ---------- */
+      var COMMAND = "npx sri-dev";
+      var copyBtn = document.getElementById("copy");
+      var resetTimer;
+      function setLabel(text) {
+        copyBtn.textContent = text;
+        clearTimeout(resetTimer);
+        resetTimer = setTimeout(function () { copyBtn.textContent = "Copy"; }, 2000);
+      }
+      function fallbackCopy(text) {
+        var ta = document.createElement("textarea");
+        ta.value = text;
+        ta.setAttribute("readonly", "");
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        var ok = false;
+        try { ok = document.execCommand("copy"); } catch (e) { }
+        ta.remove();
+        return ok;
+      }
+      copyBtn.addEventListener("click", function () {
+        var done = function () { setLabel("Copied"); };
+        var failed = function () {
+          if (fallbackCopy(COMMAND)) { done(); return; }
+          var range = document.createRange();
+          range.selectNodeContents(document.getElementById("command"));
+          var sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+          setLabel("Selected");
+        };
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(COMMAND).then(done, failed);
+        } else {
+          failed();
+        }
+      });
+
+      /* ---------- Starfield ---------- */
+      var canvas = document.createElement("canvas");
+      canvas.className = "sky";
+      canvas.setAttribute("aria-hidden", "true");
+      document.body.prepend(canvas);
+      var ctx = canvas.getContext("2d");
+      if (!ctx) return;
+
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+      var W = 0, H = 0, builtArea = 0, stars = [], meteor = null, nextMeteor = 0, last = 0, raf = 0;
+      var TINTS = ["238,122,203", "103,211,227"]; // magenta and cyan, sparingly
+      // Three depths: far stars are small, faint and slow; near ones a little brighter and faster.
+      var LAYERS = [
+        { share: 0.62, size: [0.35, 0.8], alpha: [0.22, 0.5], speed: 2.2 },
+        { share: 0.28, size: [0.7, 1.15], alpha: [0.35, 0.7], speed: 4.5 },
+        { share: 0.10, size: [1.1, 1.6], alpha: [0.55, 0.9], speed: 8 }
+      ];
+      function rand(a, b) { return a + Math.random() * (b - a); }
+
+      function sizeCanvas() {
+        var dpr = Math.min(window.devicePixelRatio || 1, 2);
+        W = window.innerWidth;
+        H = window.innerHeight;
+        canvas.width = Math.round(W * dpr);
+        canvas.height = Math.round(H * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      function buildStars() {
+        var count = Math.min(650, Math.round((W * H) / 2700));
+        stars = [];
+        LAYERS.forEach(function (L) {
+          var n = Math.round(count * L.share);
+          for (var i = 0; i < n; i++) {
+            stars.push({
+              x: Math.random() * W,
+              y: Math.random() * H,
+              r: rand(L.size[0], L.size[1]),
+              a: rand(L.alpha[0], L.alpha[1]),
+              v: L.speed * rand(0.8, 1.2),
+              tw: rand(0.15, 0.55),             // how much it twinkles
+              ts: rand(0.35, 1.1),              // how fast it twinkles
+              ph: Math.random() * Math.PI * 2,
+              c: Math.random() < 0.05 ? TINTS[i % 2] : "255,255,255"
+            });
+          }
+        });
+        builtArea = W * H;
+      }
+
+      function drawStars(t, dt) {
+        ctx.clearRect(0, 0, W, H);
+        for (var i = 0; i < stars.length; i++) {
+          var s = stars[i];
+          if (dt) {
+            s.x -= s.v * dt;
+            s.y -= s.v * 0.22 * dt;
+            if (s.x < -3) s.x += W + 6;
+            if (s.y < -3) s.y += H + 6;
+          }
+          var glow = 0.5 + 0.5 * Math.sin(t * s.ts + s.ph);
+          var alpha  = s.a * (1 - s.tw + s.tw * glow);
+          ctx.fillStyle = "rgba(" + s.c + "," + alpha.toFixed(3) + ")";
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r, 0, 6.2832);
+          ctx.fill();
+        }
+      }
+
+      function spawnMeteor(t) {
+        meteor = {
+          x: rand(W * 0.3, W * 1.0),
+          y: rand(-20, H * 0.35),
+          vx: -rand(420, 560),
+          vy: rand(150, 230),
+          life: 0,
+          dur: rand(0.7, 1.05)
+        };
+        nextMeteor = t + rand(16, 32);
+      }
+
+      function drawMeteor(dt) {
+        meteor.life += dt;
+        var p = meteor.life / meteor.dur;
+        if (p >= 1) { meteor = null; return; }
+        meteor.x += meteor.vx * dt;
+        meteor.y += meteor.vy * dt;
+        var fade = Math.sin(p * Math.PI);
+        var tx = meteor.x - meteor.vx * 0.18;
+        var ty = meteor.y - meteor.vy * 0.18;
+        var g = ctx.createLinearGradient(meteor.x, meteor.y, tx, ty);
+        g.addColorStop(0, "rgba(255,255,255," + (0.45 * fade).toFixed(3) + ")");
+        g.addColorStop(1, "rgba(255,255,255,0)");
+        ctx.strokeStyle = g;
+        ctx.lineWidth = 1.1;
+        ctx.lineCap = "round";
+        ctx.beginPath();
+        ctx.moveTo(meteor.x, meteor.y);
+        ctx.lineTo(tx, ty);
+        ctx.stroke();
+      }
+
+      function frame(ms) {
+        var t = ms / 1000;
+        var dt = last ? Math.min(t - last, 0.05) : 0; // clamp so a hidden tab doesn't jump
+        last = t;
+        drawStars(t, dt);
+        if (!nextMeteor) nextMeteor = t + rand(8, 14);
+        if (!meteor && t >= nextMeteor) spawnMeteor(t);
+        if (meteor) drawMeteor(dt);
+        raf = requestAnimationFrame(frame);
+      }
+
+      function start() {
+        cancelAnimationFrame(raf);
+        last = 0;
+        meteor = null;
+        if (reduce.matches) {
+          drawStars(0, 0); // a still sky, no motion
+        } else {
+          raf = requestAnimationFrame(frame);
+        }
+      }
+
+      var resizeTimer;
+      window.addEventListener("resize", function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () {
+          var oldW = W, oldH = H;
+          sizeCanvas();
+          if (W * H > builtArea * 1.5) {
+            buildStars();
+          } else {
+            // Stretch the existing sky so a mobile address bar showing or hiding doesn't reshuffle it
+            for (var i = 0; i < stars.length; i++) {
+              stars[i].x *= W / oldW;
+              stars[i].y *= H / oldH;
+            }
+          }
+          if (reduce.matches) drawStars(0, 0);
+        }, 120);
+      });
+      if (reduce.addEventListener) reduce.addEventListener("change", start);
+
+      sizeCanvas();
+      buildStars();
+      start();
+    });
+  </script>
+</head>
+
+<body>
+  <main>
+    <p class="who"><strong>Srikumar K S</strong>, Java backend engineer</p>
+
+    <h1>My portfolio website is still being built.</h1>
+    <p class="lede">In the meantime, the whole portfolio runs in your terminal: who I am, what I’ve built, and how to
+      reach me. One command, no global install.</p>
+
+    <section class="term" aria-label="Terminal">
+      <div class="cmd">
+        <code id="command"><span class="prompt">$ </span>npx <span class="pkg">sri-dev</span></code>
+        <button class="copy" type="button" id="copy" aria-describedby="command">Copy</button>
+      </div>
+    </section>
+
+    <p class="note">Needs Node.js. If npx asks to download <code>sri-dev</code> first, press <code>y</code>.</p>
+
+    <footer>
+      <p>Rather stay in the browser?</p>
+      <a href="https://github.com/sri1873" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/ks-srikumar/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:kssrikumar180703@gmail.com">Email</a>
+      <a href="https://www.npmjs.com/package/sri-dev" target="_blank" rel="noopener">npm package</a>
+    </footer>
+  </main>
+</body>
+
+</html>
